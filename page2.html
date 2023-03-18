@@ -7,6 +7,39 @@
     <title>The page itself</title>
 </head>
 <body>
+    
+      <div class="sidebar">
+        <div class="hamburger-menu__container">
+          <div class="hamburger-menu">
+            <div class="hamburger-menu__line"></div>
+            <div class="hamburger-menu__line"></div>
+            <div class="hamburger-menu__line"></div>
+          </div>
+        </div>
+        <nav class="nav">
+          <nav class="nav__item">
+            <i data-feather="user" class="nav__item-icon"></i>
+            <span class="nav__item-text">Account</span>
+          </nav>
+          <nav class="nav__item">
+            <i data-feather="bookmark" class="nav__item-icon"></i>
+            <span class="nav__item-text">Bookmarks</span>
+          </nav>
+          <nav class="nav__item">
+            <i data-feather="bar-chart-2" class="nav__item-icon"></i>
+            <span class="nav__item-text">Data history</span>
+          </nav>
+          <nav class="nav__item">
+            <i data-feather="arrow-down-circle" class="nav__item-icon"></i>
+            <span class="nav__item-text">Download</span>
+          </nav>
+        </nav>
+      </div>
+      <script src="src/index.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+      <script>
+        feather.replace();
+      </script>
     <img id="logo" src="blue_planet_tech-removebg-preview.png" alt="">
 </body>
 </html>
@@ -20,8 +53,294 @@
         position: absolute;
         top: -40px;
         height: 200px;
-        left: -170px;
+        right: 0px;
     }
+    
+    :root {
+  --light-purple: #eef2ff;
+  --purple: #a5b4fc;
+  --dark-purple: #4f46e5;
+  --darker-purple: #3730a3;
+}
+
+//Generic
+
+body {
+  background-color: var(--light-purple);
+  font-family: -apple-system, sans-serif;
+  margin: 0;
+}
+
+.feather {
+  color: var(--light-purple);
+  stroke-width: 2.5;
+  width: 26px;
+  height: 26px;
+}
+
+.title__container {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin-left: 24px;
+  margin-bottom: 24px;
+}
+
+.made,
+.title {
+  color: var(--purple);
+}
+
+.title {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.hamburger-menu__container,
+.nav__item {
+  --size: 60px;
+  background-color: var(--dark-purple);
+  width: var(--size);
+  height: var(--size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--darker-purple);
+  }
+}
+
+//Hamburger
+
+.hamburger-menu {
+  width: 50%;
+  position: relative;
+
+  &__line {
+    background-color: var(--light-purple);
+    height: 3px;
+    border-radius: 2px;
+  }
+
+  &__line:first-child,
+  &__line:last-child {
+    width: 100%;
+    position: absolute;
+    transition: all 0.1s ease-out;
+  }
+}
+
+.hamburger-menu__line {
+  &:not(:first-child):not(:last-child) {
+    animation-name: hamburger;
+    animation-duration: 0.15s;
+    animation-delay: 0.15s;
+    transform: scaleX(0);
+  }
+
+  &,
+  &:first-child,
+  &:last-child {
+    animation-fill-mode: forwards;
+  }
+
+  &:first-child,
+  &:last-child {
+    transform-origin: 50%;
+    animation-duration: 0.3s;
+  }
+
+  &:first-child {
+    top: 0;
+    animation-name: hamburgerFirst;
+    transform: rotate(45deg);
+  }
+
+  &:last-child {
+    top: 0;
+    animation-name: hamburgerLast;
+    transform: rotate(-45deg);
+  }
+}
+
+.hamburger-menu--open .hamburger-menu__line {
+  &:not(:first-child):not(:last-child) {
+    animation-name: hamburgerOpen;
+    transform: scaleX(100%);
+  }
+
+  &:first-child {
+    top: -10px;
+    transform: rotate(0);
+    animation-name: hamburgerFirstOpen;
+  }
+
+  &:last-child {
+    top: 10px;
+    transform: rotate(0);
+    animation-name: hamburgerLastOpen;
+  }
+}
+
+@keyframes hamburger {
+  0% {
+    transform: scaleX(0);
+  }
+
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes hamburgerOpen {
+  0% {
+    transform: scaleX(1);
+  }
+
+  100% {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes hamburgerFirst {
+  0% {
+    top: 0;
+    transform: rotate(45deg);
+  }
+  50% {
+    top: 0;
+    transform: rotate(0);
+  }
+  100% {
+    top: 10px;
+    transform: rotate(0);
+  }
+}
+
+@keyframes hamburgerLast {
+  0% {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+  50% {
+    top: 0;
+    transform: rotate(0);
+  }
+  100% {
+    top: -10px;
+    transform: rotate(0);
+  }
+}
+
+@keyframes hamburgerFirstOpen {
+  0% {
+    top: 10px;
+    transform: rotate(0);
+  }
+  50% {
+    top: 0;
+    transform: rotate(0);
+  }
+  100% {
+    top: 0;
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes hamburgerLastOpen {
+  0% {
+    top: -12px;
+    transform: rotate(0);
+  }
+  50% {
+    top: 0;
+    transform: rotate(0);
+  }
+  100% {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+}
+
+.nav__item {
+  top: 0;
+  position: absolute;
+  z-index: -1;
+  transition-property: all;
+  transition-timing-function: ease-in-out;
+
+  &:hover .nav__item-text {
+    left: 120%;
+    opacity: 1;
+  }
+}
+
+.nav--open .nav__item:first-child {
+  top: 60px;
+  transition-duration: 0.15s;
+  z-index: -1;
+}
+
+.nav--open .nav__item:nth-child(2) {
+  top: calc(60px * 2);
+  transition-duration: 0.3s;
+  z-index: -2;
+}
+
+.nav--open .nav__item:nth-child(3) {
+  top: calc(60px * 3);
+  transition-duration: 0.45s;
+  z-index: -3;
+}
+
+.nav--open .nav__item:last-child {
+  top: calc(60px * 4);
+  transition-duration: 0.6s;
+  z-index: -4;
+}
+
+.nav__item-text {
+  color: var(--dark-purple);
+  position: absolute;
+  font-weight: 600;
+  left: 105%;
+  opacity: 0;
+  font-size: 18px;
+  white-space: nowrap;
+  transition: all 0.3s ease-in-out;
+}
 
 
 </style>
+
+
+<script>
+    const sidebar = document.querySelector(".sidebar");
+
+if (sidebar) {
+  const init = () => {
+    attachEvents();
+  };
+
+  const hamburgerMenu = document.querySelector(".hamburger-menu");
+  const hamburgerMenuContainer = document.querySelector(
+    ".hamburger-menu__container"
+  );
+  const nav = document.querySelector(".nav");
+
+  const attachEvents = () => {
+    hamburgerMenuContainer.addEventListener("click", toggleMenu);
+  };
+
+  const toggleMenu = () => {
+    hamburgerMenu.classList.toggle("hamburger-menu--open");
+    nav.classList.toggle("nav--open");
+  };
+
+  init();
+}
+
+</script>
